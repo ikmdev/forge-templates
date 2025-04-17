@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>dev.ikm.binding</groupId>
+        <artifactId>forge-templates</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>java-binding</artifactId>
+    <packaging>pom</packaging>
+
+    <name>Java Binding Template</name>
+    <description>
+        Java Binding Template is a maven project that packages an FTL file as a maven artifact to be used in the Tinkar
+        Forge project.
+    </description>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <configuration>
+                    <artifacts>
+                        <artifact>
+                            <file>${project.basedir}/src/main/resources/java_binding.ftl</file>
+                            <classifier>template</classifier>
+                            <type>ftl</type>
+                        </artifact>
+                    </artifacts>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
