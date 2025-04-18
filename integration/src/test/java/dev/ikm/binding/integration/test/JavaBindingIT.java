@@ -29,7 +29,7 @@ public class JavaBindingIT {
     }
 
     @Test
-    public void givenStarterData_whenJavaBindingTemplateIsExecuted_thenJavaBindingFileisGenerated() {
+    public void givenStarterData_whenJavaBindingTemplateIsExecuted_thenJavaBindingFileIsGenerated() {
         long startTime = System.nanoTime();
 
         try (FileWriter fw = new FileWriter(createFilePathInTarget.apply("/test/ForgeTestTerm.java"))) {
