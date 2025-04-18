@@ -29,7 +29,7 @@ public class JavaBindingIT {
     }
 
     @Test
-    public void test() {
+    public void givenStarterData_whenJavaBindingTemplateIsExecuted_thenJavaBindingFileisGenerated() {
         long startTime = System.nanoTime();
 
         try (FileWriter fw = new FileWriter(createFilePathInTarget.apply("/test/ForgeTestTerm.java"))) {
@@ -43,7 +43,7 @@ public class JavaBindingIT {
                     .variable("namespace", UUID.randomUUID().toString())
                     .variable("defaultSTAMPCalc", testHelper.getSTAMP_CALCULATOR())
                     .variable("defaultLanguageCalc", testHelper.getLANGUAGE_CALCULATOR())
-                    .template("java-binding-1.0.0-SNAPSHOT-template.ftl", new BufferedWriter(fw))
+                    .template("java-binding-1.0.0-SNAPSHOT.ftl", new BufferedWriter(fw))
                     .execute();
         } catch (IOException e) {
             e.printStackTrace();

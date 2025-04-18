@@ -26,7 +26,6 @@
                     <artifacts>
                         <artifact>
                             <file>${project.basedir}/src/main/resources/java_binding.ftl</file>
-                            <classifier>template</classifier>
                             <type>ftl</type>
                         </artifact>
                     </artifacts>

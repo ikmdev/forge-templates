@@ -80,7 +80,6 @@
                                     <groupId>${parent.groupId}</groupId>
                                     <artifactId>java-binding</artifactId>
                                     <version>${project.parent.version}</version>
-                                    <classifier>template</classifier>
                                     <type>ftl</type>
                                 </artifactItem>
                             </artifactItems>
