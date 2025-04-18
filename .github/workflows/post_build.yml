@@ -3,15 +3,15 @@ name: Post Build Action
 run-name: 'Post Build Action -- ${{github.event.workflow_run.head_branch}}'
 
 on:
-   workflow_run:
+  workflow_run:
     workflows:
       - Build Workflow
     types:
       - completed
 
 permissions:
-  contents: write 
-        
+  contents: write
+
 jobs:
   post-build:
     name: Post Build Actions
@@ -24,17 +24,17 @@ jobs:
           repository: ${{github.event.workflow_run.head_repository.full_name}}
           ref: ${{github.event.workflow_run.head_branch}}
           fetch-depth: 0
-          
+
       - name: IKMDEV Post Build Action
         id: ikmdev_post_build
         uses: ikmdev/maven-post-build-action@v2
         with:
-            nexus_repo_password: ${{secrets.EC2_NEXUS_PASSWORD}}
-            branch_name: ${{github.event.workflow_run.head_branch}}
-            github_token: ${{secrets.GITHUB_TOKEN}}
-            ossrh_username: ${{secrets.OSSRH_TOKEN_USER}}
-            ossrh_token: ${{secrets.OSSRH_TOKEN_PASS}}
-            gpg_key: ${{secrets.GPG_KEY}}
-            gpg_passphrase: ${{secrets.GPG_PASSPHRASE}}
-            sonarcloud_token: ${{ secrets.SONAR_TOKEN }}
-            sonarcloud_tests: ${{ '' }}
+          nexus_repo_password: ${{secrets.EC2_NEXUS_PASSWORD}}
+          branch_name: ${{github.event.workflow_run.head_branch}}
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          ossrh_username: ${{secrets.OSSRH_TOKEN_USER}}
+          ossrh_token: ${{secrets.OSSRH_TOKEN_PASS}}
+          gpg_key: ${{secrets.GPG_KEY}}
+          gpg_passphrase: ${{secrets.GPG_PASSPHRASE}}
+          sonarcloud_token: ${{ secrets.SONAR_TOKEN }}
+          sonarcloud_tests: ${{ '' }}
