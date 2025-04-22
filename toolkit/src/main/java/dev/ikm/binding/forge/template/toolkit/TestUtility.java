@@ -1,4 +1,4 @@
-package dev.ikm.binding.integration.test;
+package dev.ikm.binding.forge.template.toolkit;
 
 import dev.ikm.tinkar.common.service.CachingService;
 import dev.ikm.tinkar.common.service.PrimitiveData;
@@ -25,13 +25,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public class TestHelper {
+public class TestUtility {
 
-    private final Logger LOG = LoggerFactory.getLogger(TestHelper.class);
+    private final Logger LOG = LoggerFactory.getLogger(TestUtility.class);
 
     public static final Function<String, File> createFilePathInTarget = (pathName) -> new File("%s/target/%s".formatted(System.getProperty("user.dir"), pathName));
     public static final File PB_STARTER_DATA = createFilePathInTarget.apply("data/tinkar-example-data-1.1.0+1.1.1-reasoned-pb.zip");
-    public static final File TEMPLATES_DIRECTORY = createFilePathInTarget.apply("templates");
+    public static final File TEMPLATE_DIRECTORY = new File(System.getProperty("user.dir") + "/src/main/resources");
 
     private StampCalculator STAMP_CALCULATOR;
     private LanguageCalculator LANGUAGE_CALCULATOR;
@@ -47,7 +47,7 @@ public class TestHelper {
     private final AtomicInteger patternCount = new AtomicInteger(0);
     private final AtomicInteger stampCount = new AtomicInteger(0);
 
-    public TestHelper() {
+    public void start() {
         try {
             Files.createDirectories(createFilePathInTarget.apply("/test").toPath());
         } catch (IOException e) {
@@ -59,7 +59,10 @@ public class TestHelper {
         PrimitiveData.start();
         LoadEntitiesFromProtobufFile loadEntitiesFromProtobufFile = new LoadEntitiesFromProtobufFile(PB_STARTER_DATA);
         loadEntitiesFromProtobufFile.compute();
+        initializeTestArtifacts();
+    }
 
+    private void initializeTestArtifacts() {
         var languageList = Lists.mutable.of(Coordinates.Language.UsEnglishFullyQualifiedName()).toImmutableList();
         StampCoordinateRecord stampCoordinateRecord = Coordinates.Stamp.DevelopmentLatest();
         NavigationCoordinateRecord navigationCoordinateRecord = Coordinates.Navigation.stated().toNavigationCoordinateRecord();

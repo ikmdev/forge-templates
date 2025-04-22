@@ -11,17 +11,18 @@
         <relativePath/>
     </parent>
 
-    <groupId>dev.ikm.binding</groupId>
+    <groupId>dev.ikm.binding.forge</groupId>
     <artifactId>forge-templates</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-      <properties>
+    <properties>
         <tinkar-core.version>1.90.0</tinkar-core.version>
         <slf4j.version>2.0.13</slf4j.version>
         <log4j.version>3.0.0-alpha1</log4j.version>
         <tinkar-example-data.version>1.1.0+1.1.1</tinkar-example-data.version>
-          <forge.version>1.1.0</forge.version>
+        <forge.version>1.1.0</forge.version>
+        <properties-maven-plugin.version>1.2.1</properties-maven-plugin.version>
 
         <!-- JPMS Dependencies -->
         <tinkar-jpms-deps.groupId>dev.ikm.jpms</tinkar-jpms-deps.groupId>
@@ -48,7 +49,7 @@
     </licenses>
 
     <scm>
-        <url>https://github.com/ikmdev/forge</url>
+        <url>https://github.com/ikmdev/forge-templates</url>
     </scm>
 
     <developers>
@@ -61,7 +62,7 @@
 
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/ikmdev/forge/issues</url>
+        <url>https://github.com/ikmdev/forge-templates/issues</url>
     </issueManagement>
 
     <url>http://www.ikm.dev</url>
@@ -72,8 +73,8 @@
     </organization>
 
     <modules>
-        <module>java-binding</module>
-        <module>integration</module>
+        <module>term-java</module>
+        <module>toolkit</module>
     </modules>
 
 
@@ -83,11 +84,6 @@
             <dependency>
                 <groupId>dev.ikm.tinkar</groupId>
                 <artifactId>data-ephemeral-provider</artifactId>
-                <version>${tinkar-core.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>dev.ikm.tinkar</groupId>
-                <artifactId>data-spinedarray-provider</artifactId>
                 <version>${tinkar-core.version}</version>
             </dependency>
 
@@ -103,6 +99,13 @@
                 <groupId>dev.ikm.tinkar</groupId>
                 <artifactId>forge</artifactId>
                 <version>${forge.version}</version>
+            </dependency>
+
+            <!-- Forge Template Toolkit -->
+            <dependency>
+                <groupId>dev.ikm.binding.forge</groupId>
+                <artifactId>toolkit</artifactId>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
@@ -131,15 +134,6 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
                     <version>${build-helper-maven-plugin.version}</version>
-                    <executions>
-                        <execution>
-                            <id>attach-ftl</id>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>attach-artifact</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>
