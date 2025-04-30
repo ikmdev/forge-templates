@@ -1,4 +1,4 @@
-module dev.ikm.binding.forge.template.term.java.test {
+module dev.ikm.binding.forge.template.pattern.individual.java.test {
     requires dev.ikm.tinkar.forge;
     requires org.junit.jupiter.api;
     requires dev.ikm.tinkar.coordinate;
@@ -8,5 +8,5 @@ module dev.ikm.binding.forge.template.term.java.test {
     requires dev.ikm.jpms.eclipse.collections.api;
     requires dev.ikm.binding.forge.template.toolkit;
 
-    exports dev.ikm.binding.forge.template.term.java.test;
+    exports dev.ikm.binding.forge.template.pattern.individual.java.test;
 }

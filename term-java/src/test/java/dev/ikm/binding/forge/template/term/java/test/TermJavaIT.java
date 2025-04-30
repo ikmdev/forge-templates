@@ -1,6 +1,6 @@
-package dev.ikm.binding.forge.template.java.term.test;
+package dev.ikm.binding.forge.template.term.java.test;
 
-import dev.ikm.binding.forge.template.toolkit.TestUtility;
+import dev.ikm.binding.forge.template.pattern.nested.java.test.template.toolkit.TestUtility;
 import dev.ikm.tinkar.forge.Forge;
 import dev.ikm.tinkar.forge.TinkarForge;
 import org.junit.jupiter.api.*;
@@ -10,11 +10,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.UUID;
 
-import static dev.ikm.binding.forge.template.toolkit.TestUtility.TEMPLATE_DIRECTORY;
-import static dev.ikm.binding.forge.template.toolkit.TestUtility.createFilePathInTarget;
+import static dev.ikm.binding.forge.template.pattern.nested.java.test.template.toolkit.TestUtility.TEMPLATE_DIRECTORY;
+import static dev.ikm.binding.forge.template.pattern.nested.java.test.template.toolkit.TestUtility.createFilePathInTarget;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TermJavaIT {
 
     private final TestUtility testUtility =  new TestUtility();
@@ -30,7 +29,7 @@ public class TermJavaIT {
     }
 
     @Test
-    public void givenStarterData_whenJavaBindingTemplateIsExecuted_thenJavaBindingFileIsGenerated() {
+    public void givenStarterData_whenTermJavaTemplateIsExecuted_thenJavaTermBindingFileIsGenerated() {
         long startTime = System.nanoTime();
 
         try (FileWriter fw = new FileWriter(createFilePathInTarget.apply("/test/ForgeTestTerm.java"))) {

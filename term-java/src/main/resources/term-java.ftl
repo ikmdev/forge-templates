@@ -1,65 +1,67 @@
 <#-- Directive to replace special characters with uppercase word representations, surrounded by underscores. -->
-<#macro replaceSpecialCharacters text>
+<#function replaceSpecialCharacters text>
+    <#local result = "">
     <#if text??>
-        <#assign result = "">
-        <#list text?replace(" (SOLOR)", "")?split("") as char>
+        <#local text = text?replace("(SOLOR)", "")?remove_ending(" ")>
+        <#list text?split("") as char>
             <#switch char>
-                <#case "!"><#assign result = result + "_EXCLAMATION_"><#break>
-                <#case "@"><#assign result = result + "_AT_"><#break>
-                <#case "#"><#assign result = result + "_POUND_"><#break>
-                <#case "$"><#assign result = result + "_DOLLAR_"><#break>
-                <#case "%"><#assign result = result + "_PERCENT_"><#break>
-                <#case "^"><#assign result = result + "_CARET_"><#break>
-                <#case "&"><#assign result = result + "_AMPERSAND_"><#break>
-                <#case "*"><#assign result = result + "_ASTERISK_"><#break>
-                <#case "("><#assign result = result + "_OPENPARENTHESIS_"><#break>
-                <#case ")"><#assign result = result + "_CLOSEPARENTHESIS_"><#break>
-                <#case "-"><#assign result = result + "_DASH_"><#break>
-                <#case "_"><#assign result = result + "_UNDERSCORE_"><#break>
-                <#case "="><#assign result = result + "_EQUALS_"><#break>
-                <#case "+"><#assign result = result + "_PLUS_"><#break>
-                <#case "["><#assign result = result + "_OPENBRACKET_"><#break>
-                <#case "]"><#assign result = result + "_CLOSEBRACKET_"><#break>
-                <#case "{"><#assign result = result + "_OPENBRACE_"><#break>
-                <#case "}"><#assign result = result + "_CLOSEBRACE_"><#break>
-                <#case "\\"><#assign result = result + "_BACKSLASH_"><#break>
-                <#case "|"><#assign result = result + "_PIPE_"><#break>
-                <#case ";"><#assign result = result + "_SEMICOLON_"><#break>
-                <#case ":"><#assign result = result + "_COLON_"><#break>
-                <#case "'"><#assign result = result + "_SINGLEQUOTE_"><#break>
-                <#case "\""><#assign result = result + "_DOUBLEQUOTE_"><#break>
-                <#case ","><#assign result = result + "_COMMA_"><#break>
-                <#case "."><#assign result = result + "_PERIOD_"><#break>
-                <#case "/"><#assign result = result + "_FORWARDSLASH_"><#break>
-                <#case "<"><#assign result = result + "_LESSTHAN_"><#break>
-                <#case ">"><#assign result = result + "_GREATERTHAN_"><#break>
-                <#case "?"><#assign result = result + "_QUESTIONMARK_"><#break>
-                <#default><#assign result = result + char>
+                <#case "!"><#local result = result + "_EXCLAMATION_"><#break>
+                <#case "@"><#local result = result + "_AT_"><#break>
+                <#case "#"><#local result = result + "_POUND_"><#break>
+                <#case "$"><#local result = result + "_DOLLAR_"><#break>
+                <#case "%"><#local result = result + "_PERCENT_"><#break>
+                <#case "^"><#local result = result + "_CARET_"><#break>
+                <#case "&"><#local result = result + "_AMPERSAND_"><#break>
+                <#case "*"><#local result = result + "_ASTERISK_"><#break>
+                <#case "("><#local result = result + "_OPENPARENTHESIS_"><#break>
+                <#case ")"><#local result = result + "_CLOSEPARENTHESIS_"><#break>
+                <#case "-"><#local result = result + "_DASH_"><#break>
+                <#case "_"><#local result = result + "_UNDERSCORE_"><#break>
+                <#case "="><#local result = result + "_EQUALS_"><#break>
+                <#case "+"><#local result = result + "_PLUS_"><#break>
+                <#case "["><#local result = result + "_OPENBRACKET_"><#break>
+                <#case "]"><#local result = result + "_CLOSEBRACKET_"><#break>
+                <#case "{"><#local result = result + "_OPENBRACE_"><#break>
+                <#case "}"><#local result = result + "_CLOSEBRACE_"><#break>
+                <#case "\\"><#local result = result + "_BACKSLASH_"><#break>
+                <#case "|"><#local result = result + "_PIPE_"><#break>
+                <#case ";"><#local result = result + "_SEMICOLON_"><#break>
+                <#case ":"><#local result = result + "_COLON_"><#break>
+                <#case "'"><#local result = result + "_SINGLEQUOTE_"><#break>
+                <#case "\""><#local result = result + "_DOUBLEQUOTE_"><#break>
+                <#case ","><#local result = result + "_COMMA_"><#break>
+                <#case "."><#local result = result + "_PERIOD_"><#break>
+                <#case "/"><#local result = result + "_FORWARDSLASH_"><#break>
+                <#case "<"><#local result = result + "_LESSTHAN_"><#break>
+                <#case ">"><#local result = result + "_GREATERTHAN_"><#break>
+                <#case "?"><#local result = result + "_QUESTIONMARK_"><#break>
+                <#default><#local result = result + char>
             </#switch>
         </#list>
-        <#t>${result?replace(" ", "_")?upper_case?replace("__", "_")}
     <#else>
-        <#t>${text?replace(" ", "_")?upper_case?replace("__", "_")}
+        <#local result = text>
     </#if>
-</#macro>
-<#macro formatPublicId publicId>
-    <#assign result="">
+    <#return result?replace(" ", "_")?upper_case?replace("__", "_")>
+</#function>
+<#function formatPublicId publicId>
+    <#local result = "">
     <#if publicId??>
         <#list publicId.asUuidArray() as uuid>
-            <#assign result = result + "UUID.fromString(\"${uuid}\"), ">
+            <#local result = result + "UUID.fromString(\"${uuid}\"), ">
         </#list>
     </#if>
-    <#t>${result?remove_ending(", ")}
-</#macro>
+    <#return result?remove_ending(", ")>
+</#function>
 package ${package};
 
-import java.util.UUID;
 import dev.ikm.tinkar.common.id.PublicIds;
 import dev.ikm.tinkar.terms.EntityProxy.Concept;
 import dev.ikm.tinkar.terms.EntityProxy.Pattern;
 
+import java.util.UUID;
+
 /**
- * Tinkar Bindings class to enable programmatic access to tinkar data elements known to be stored in an unarbitrary database.
+ * Tinkar Term Binding class to enable programmatic access to tinkar data elements known to be stored in an Komet database.
  * @author  ${author}
  */
 public class ${className} {
@@ -96,9 +98,8 @@ public class ${className} {
      </#if>
      </#if>
      */
-    public static final Pattern <@replaceSpecialCharacters text = patternText /> = Pattern.make("${patternText}", <@formatPublicId publicId = patternPublicId />;
+    public static final Pattern ${replaceSpecialCharacters(patternText)} = Pattern.make("${patternText}", ${formatPublicId(patternPublicId)});
     </#list>
-
     <#list concepts as concept>
 
     <#assign conceptText = textOf(concept, defaultLanguageCalc)>
@@ -111,6 +112,6 @@ public class ${className} {
      </#list>
      * </ul>
      */
-    public static final Concept <@replaceSpecialCharacters text=conceptText /> = Concept.make("${conceptText}", <@formatPublicId publicId = conceptPublicId />);
+    public static final Concept ${replaceSpecialCharacters(conceptText)} = Concept.make("${conceptText}", ${formatPublicId(conceptPublicId)});
     </#list>
 }

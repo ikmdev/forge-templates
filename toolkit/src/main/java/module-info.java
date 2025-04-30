@@ -5,5 +5,5 @@ module dev.ikm.binding.forge.template.toolkit {
     requires dev.ikm.jpms.eclipse.collections;
     requires dev.ikm.jpms.eclipse.collections.api;
 
-    exports dev.ikm.binding.forge.template.toolkit;
+    exports dev.ikm.binding.forge.template.pattern.nested.java.test.template.toolkit;
 }

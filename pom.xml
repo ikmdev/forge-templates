@@ -21,7 +21,7 @@
         <slf4j.version>2.0.13</slf4j.version>
         <log4j.version>3.0.0-alpha1</log4j.version>
         <tinkar-example-data.version>1.1.0+1.1.1</tinkar-example-data.version>
-        <forge.version>1.1.0</forge.version>
+        <forge.version>1.2.0</forge.version>
         <properties-maven-plugin.version>1.2.1</properties-maven-plugin.version>
 
         <!-- JPMS Dependencies -->
@@ -75,6 +75,8 @@
     <modules>
         <module>term-java</module>
         <module>toolkit</module>
+        <module>pattern-individual-java</module>
+        <module>pattern-nested-java</module>
     </modules>
 
 
