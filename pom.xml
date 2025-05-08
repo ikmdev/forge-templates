@@ -13,7 +13,7 @@
 
     <groupId>dev.ikm.binding.forge</groupId>
     <artifactId>forge-templates</artifactId>
-    <version>1.1.0-AR-483_updates-SNAPSHOT</version>
+    <version>1.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
