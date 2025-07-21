@@ -1,48 +1,3 @@
-<#-- Directive to replace special characters with uppercase word representations, surrounded by underscores. -->
-<#function replaceSpecialCharacters text>
-    <#local result = "">
-    <#if text??>
-        <#local text = text?replace("(SOLOR)", "")?remove_ending(" ")>
-        <#list text?split("") as char>
-            <#switch char>
-                <#case "!"><#local result = result + "_EXCLAMATION_"><#break>
-                <#case "@"><#local result = result + "_AT_"><#break>
-                <#case "#"><#local result = result + "_POUND_"><#break>
-                <#case "$"><#local result = result + "_DOLLAR_"><#break>
-                <#case "%"><#local result = result + "_PERCENT_"><#break>
-                <#case "^"><#local result = result + "_CARET_"><#break>
-                <#case "&"><#local result = result + "_AMPERSAND_"><#break>
-                <#case "*"><#local result = result + "_ASTERISK_"><#break>
-                <#case "("><#local result = result + "_OPENPARENTHESIS_"><#break>
-                <#case ")"><#local result = result + "_CLOSEPARENTHESIS_"><#break>
-                <#case "-"><#local result = result + "_DASH_"><#break>
-                <#case "_"><#local result = result + "_UNDERSCORE_"><#break>
-                <#case "="><#local result = result + "_EQUALS_"><#break>
-                <#case "+"><#local result = result + "_PLUS_"><#break>
-                <#case "["><#local result = result + "_OPENBRACKET_"><#break>
-                <#case "]"><#local result = result + "_CLOSEBRACKET_"><#break>
-                <#case "{"><#local result = result + "_OPENBRACE_"><#break>
-                <#case "}"><#local result = result + "_CLOSEBRACE_"><#break>
-                <#case "\\"><#local result = result + "_BACKSLASH_"><#break>
-                <#case "|"><#local result = result + "_PIPE_"><#break>
-                <#case ";"><#local result = result + "_SEMICOLON_"><#break>
-                <#case ":"><#local result = result + "_COLON_"><#break>
-                <#case "'"><#local result = result + "_SINGLEQUOTE_"><#break>
-                <#case "\""><#local result = result + "_DOUBLEQUOTE_"><#break>
-                <#case ","><#local result = result + "_COMMA_"><#break>
-                <#case "."><#local result = result + "_PERIOD_"><#break>
-                <#case "/"><#local result = result + "_FORWARDSLASH_"><#break>
-                <#case "<"><#local result = result + "_LESSTHAN_"><#break>
-                <#case ">"><#local result = result + "_GREATERTHAN_"><#break>
-                <#case "?"><#local result = result + "_QUESTIONMARK_"><#break>
-                <#default><#local result = result + char>
-            </#switch>
-        </#list>
-    <#else>
-        <#local result = text>
-    </#if>
-    <#return result?replace(" ", "_")?upper_case?replace("__", "_")>
-</#function>
 <#function formatPublicId publicId>
     <#local result = "">
     <#if publicId??>
@@ -54,7 +9,6 @@
 </#function>
 package ${package};
 
-import dev.ikm.tinkar.common.id.PublicIds;
 import dev.ikm.tinkar.terms.EntityProxy.Concept;
 import dev.ikm.tinkar.terms.EntityProxy.Pattern;
 
@@ -98,7 +52,7 @@ public class ${className} {
      </#if>
      </#if>
      */
-    public static final Pattern ${replaceSpecialCharacters(patternText)} = Pattern.make("${patternText}", ${formatPublicId(patternPublicId)});
+    public static final Pattern ${patternText} = Pattern.make("${patternText}", ${formatPublicId(patternPublicId)});
     </#list>
     <#list concepts as concept>
 
@@ -112,6 +66,6 @@ public class ${className} {
      </#list>
      * </ul>
      */
-    public static final Concept ${replaceSpecialCharacters(conceptText)} = Concept.make("${conceptText}", ${formatPublicId(conceptPublicId)});
+    public static final Concept ${conceptText} = Concept.make("${conceptText}", ${formatPublicId(conceptPublicId)});
     </#list>
 }
