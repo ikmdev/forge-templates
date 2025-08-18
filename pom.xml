@@ -7,8 +7,7 @@
     <parent>
         <groupId>dev.ikm.build</groupId>
         <artifactId>java-parent</artifactId>
-        <version>1.63.0</version>
-        <relativePath/>
+        <version>1.64.0</version>
     </parent>
 
     <groupId>dev.ikm.binding.forge</groupId>
